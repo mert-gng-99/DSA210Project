@@ -1,6 +1,10 @@
 # DSA 210 Introduction to Data Science: Project Proposal
 
 **Project Title:** Analyzing the Link Between Economic Growth and CO₂ Emissions: A Study of the Environmental Kuznets Curve
+1. [Motivation](#motivation)
+2. [Research Question](#research-question)
+3. [Data Sources](#data-sources)
+4. [Data Collection Plan](#data-collection-plan)
 
 ## 1. Motivation (Why this project is important)
 
