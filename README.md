@@ -114,7 +114,6 @@ I tested if there is a statistical relationship between economic growth and poll
 
 -----
 <img width="1389" height="489" alt="logdistofco2" src="https://github.com/user-attachments/assets/6a8ca48a-dcd5-4d6e-b0a4-164562d32dcb" />
-<img width="1389" height="489" alt="logdistofgpd" src="https://github.com/user-attachments/assets/353c30fd-8ae1-411d-adcd-5be689ada587" />
 <img width="857" height="552" alt="gdpandco2mixed" src="https://github.com/user-attachments/assets/54d1e3a2-4334-4694-a0f9-56ba94f2d30f" />
 
 
