@@ -105,6 +105,7 @@ First, I looked at how GDP and CO₂ emissions are distributed across the world.
 
 *The histogram (left) shows the distribution of CO₂ emissions per capita using a log scale.*
 <img width="800" alt="logdistofgpd" src="https://github.com/user-attachments/assets/6a8ca48a-dcd5-4d6e-b0a4-164562d32dcb" />
+
 *The histogram (right) above shows the distribution of GDP per capita using a log scale.*
 
 
