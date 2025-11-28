@@ -122,7 +122,7 @@ This is the most important part of the analysis. I plotted GDP vs. CO₂ emissio
 I performed a Pearson Correlation test on the log-transformed data for the entire dataset (1990-2022).
 
 * **Pearson Correlation Coefficient:** `0.90`
-* **P-value:** `0.0` (virtually zero)
+* **P-value:** < 0.001(`0.0` (virtually zero))
 
 **Result:** Since the p-value is less than 0.05, I **REJECT** the Null Hypothesis.
 
