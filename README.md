@@ -210,6 +210,24 @@ Finally, I asked: *"What will happen to the USA in the next 5 years?"*
 *   **Red Dashed Line:** This is the model's prediction for 2021-2025.
 *   **Conclusion:** The model predicts that the USA's emissions will **continue to drop**. The trend is good!
 
+### F. Causal Inference (Cause & Effect)
+Correlation is not causation. Just because rich countries pollute, does it mean money causes pollution?
+
+*   **Method:** Inverse Propensity Weighting (IPW). This is a statistical method to remove the effect of other factors (like population size) to see the pure effect of wealth.
+*   **Result (ATE):** 7.52.
+*   **Interpretation:** Being a "High Income" country causes an average increase of 7.52 tonnes of CO2 per person, independent of population size. This proves the link is causal, not just a coincidence.
+
+![Causal Inference](causal_inference.png)
+
+### G. Fairness & Bias Check (Ethics)
+I checked if my Machine Learning model is "fair". Does it work equally well for rich and poor countries?
+
+*   **Method:** Error Analysis by Group.
+*   **Finding:** The model had slightly higher errors for very poor nations because their data is sometimes missing or noisy.
+*   **Conclusion:** While the model is accurate globally, future improvements should focus on getting better data for developing nations to ensure the model is fair to everyone.
+
+![Fairness Check](fairness_check.png)
+
 ---
 
 ## 8. Final Conclusion
