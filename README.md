@@ -1,4 +1,4 @@
-# DSA 210 Introduction to Data Science: Final Project Report
+# DSA 210 Introduction to Data Science: Project Report
 
 **Project Title:** The Price of Wealth: A Deep Dive into Economic Growth and Carbon Emissions (1990-2020)
 
