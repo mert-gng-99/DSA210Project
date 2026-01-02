@@ -13,8 +13,9 @@
 4.  [Part 1: The Global Picture (Correlation)](#4-part-1-the-global-picture-correlation)
 5.  [Part 2: Adding Time (Temporality Analysis)](#5-part-2-adding-time-temporality-analysis)
 6.  [Part 3: Testing the Theory (EKC Hypothesis)](#6-part-3-testing-the-theory-ekc-hypothesis)
-7.  [Final Conclusion](#7-final-conclusion)
-8.  [Limitations and What's Next](#8-limitations-and-whats-next)
+7.  [Part 4: Machine Learning Analysis](#7-part-4-machine-learning-analysis)
+8.  [Final Conclusion](#8-final-conclusion)
+9.  [Limitations and What's Next](#9-limitations-and-whats-next)
 
 ---
 
@@ -77,6 +78,7 @@ Real data is often messy.
 *   **Static Analysis:** Looking at just one year (2019) to see a snapshot.
 *   **Time Analysis:** Looking at how things change year by year (like a movie).
 *   **Math Test:** Using a formula called "Polynomial Regression" to scientifically test the curve.
+*   **Machine Learning:** Using advanced computer algorithms to predict pollution.
 
 ---
 
@@ -143,7 +145,74 @@ I fitted a curve formula ($y = ax^2 + bx + c$) to the USA data.
 
 ---
 
-## 7. Final Conclusion
+## 7. Part 4: Machine Learning Analysis
+
+In this final part, I used advanced Machine Learning (ML) methods to understand the data even better.
+
+### A. Regression (Prediction)
+I asked the question: *"Can we predict how much CO2 a country produces if we only know its GDP and Population?"*
+*   **Method:** Random Forest Regressor (A machine learning model that uses many decision trees).
+*   **Result (R² Score):** 0.86. This means the model is **86% accurate**!
+
+
+<img width="846" height="470" alt="regressionresult" src="https://github.com/user-attachments/assets/ec0561ae-ae33-44d0-8ddf-3526d4bf9284" />
+
+**Graph Interpretation:**
+*   In the graph above, the **Red Dashed Line** represents a "perfect guess".
+*   The **Green Dots** are the model's predictions.
+*   **Observation:** Most green dots are very close to the red line. This shows that Wealth (GDP) and Population are very strong indicators of pollution. The model works well.
+
+### B. Classification (Yes/No Estimate)
+I asked the question: *"Can we classify if a country is a 'High Polluter' or 'Low Polluter'?"*
+*   **Method:** Random Forest Classifier.
+*   **Result (Accuracy):** 92%. The model guesses correctly 92 times out of 100.
+
+<img width="513" height="470" alt="confusionmatrix (randomforestclassification)" src="https://github.com/user-attachments/assets/b1545e08-e58d-4554-96a1-79f44b29ea1e" />
+
+**Graph Interpretation (Confusion Matrix):**
+*   **Dark Blue Squares** show the correct guesses.
+    *   **599** times it correctly said "Low Polluter".
+    *   **592** times it correctly said "High Polluter".
+*   **Light Blue Squares** show the mistakes (only 49 and 55 errors).
+*   **Meaning:** The computer is very good at separating clean countries from dirty countries using economic data.
+
+### C. Unsupervised Learning (Clustering)
+I set a goal: *"Don't use any labels. Just look at the data and find natural groups of countries."*
+*   **Method:** K-Means Clustering.
+
+
+<img width="857" height="552" alt="kmeansclustering" src="https://github.com/user-attachments/assets/08993b80-7715-4607-b728-65d999c048bf" />
+
+**Graph Interpretation:**
+The colors show the 3 different groups the model found:
+1.  **Purple Dots (Low GDP, Low CO2):** These are poor countries. They don't have much money, but they also don't pollute much.
+2.  **Green Dots (Middle):** These are developing nations (like Turkey, Brazil). They are getting richer and starting to pollute more.
+3.  **Yellow Dots (High GDP, High CO2):** These are rich countries (like USA, Europe). They are wealthy but have high emissions.
+
+### D. PCA Analysis (Visualizing the Groups)
+Data is complex (3D). I used PCA to flatten it to 2D so we can see it easily.
+
+<img width="833" height="547" alt="pcaanalysis" src="https://github.com/user-attachments/assets/d1c7f5f2-10c2-43aa-827c-41a43cfca33a" />
+
+**Graph Interpretation:**
+*   Even when we flatten the data, we can still see the **3 separate colors (groups)** clearly.
+*   This proves that the groups are real and distinct, not just random.
+
+### E. Time Series (Predicting the Future)
+Finally, I asked: *"What will happen to the USA in the next 5 years?"*
+*   **Method:** ARIMA (AutoRegressive Integrated Moving Average).
+
+
+<img width="842" height="470" alt="timeseriesforecasting" src="https://github.com/user-attachments/assets/94f0d00b-8203-4a20-b857-fc44b81b5ec1" />
+
+**Graph Interpretation:**
+*   **Blue Line:** This is real history (1990-2020). You can see the pollution going down recently.
+*   **Red Dashed Line:** This is the model's prediction for 2021-2025.
+*   **Conclusion:** The model predicts that the USA's emissions will **continue to drop**. The trend is good!
+
+---
+
+## 8. Final Conclusion
 
 This project reveals a complex story about our world:
 
@@ -153,7 +222,7 @@ This project reveals a complex story about our world:
 
 ---
 
-## 8. Limitations and What's Next
+## 9. Limitations and What's Next
 
 *   **Missing Pieces:** I only looked at $CO_2$. I did not look at plastic waste, deforestation, or water pollution.
 *   **It's Not Just Money:** I focused on GDP. But laws, government policies, and population size also affect pollution.
