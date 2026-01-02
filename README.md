@@ -1,173 +1,171 @@
-# DSA 210 Introduction to Data Science: Project Proposal
+# DSA 210 Introduction to Data Science: Final Project Report
 
-**Project Title:** Analyzing the Link Between Economic Growth and CO₂ Emissions: A Study of the Environmental Kuznets Curve
+**Project Title:** The Price of Wealth: A Deep Dive into Economic Growth and Carbon Emissions (1990-2020)
 
 **Student Name:** Mert Güngör
 
+---
+
 ## Table of Contents
-1. [Motivation](#1-motivation-why-this-project-is-important)
-2. [Data Sources](#2-data-sources-where-the-data-comes-from)
-3. [Data Collection Plan](#3-data-collection-plan-how-i-will-get-the-data)
-4. [Methodology](#4-methodology-how-i-analyzed-the-data)
-5. [Analysis and Findings](#5-analysis-and-findings)
-6. [Conclusion](#6-conclusion)
-7. [Limitations and Future Work](#7-limitations-and-future-work)
+1.  [Introduction and Motivation](#1-introduction-and-motivation)
+2.  [The Data We Used](#2-the-data-we-used)
+3.  [Step-by-Step Methodology](#3-step-by-step-methodology)
+4.  [Part 1: The Global Picture (Correlation)](#4-part-1-the-global-picture-correlation)
+5.  [Part 2: Adding Time (Temporality Analysis)](#5-part-2-adding-time-temporality-analysis)
+6.  [Part 3: Testing the Theory (EKC Hypothesis)](#6-part-3-testing-the-theory-ekc-hypothesis)
+7.  [Final Conclusion](#7-final-conclusion)
+8.  [Limitations and What's Next](#8-limitations-and-whats-next)
 
 ---
 
-## 1. Motivation (Why this project is important)
+## 1. Introduction and Motivation
 
-### The Problem
-Climate change is a big problem for the world, and it is mainly caused by carbon dioxide (CO₂) emissions [1, 2]. In the past, when a country's economy grew, its CO₂ emissions also grew. This is because economic growth often needs more energy, and this energy usually comes from burning fossil fuels [3].
+### Why is this topic important?
+Global warming is one of the biggest dangers to our planet. The main cause of global warming is a gas called **Carbon Dioxide ($CO_2$)**. We produce this gas when we drive cars, use electricity, or run factories.
 
-This project studies the relationship between a country's economic level and its CO₂ emissions. We want to understand if countries can grow their economies without increasing pollution.
+For a long time, people believed that **money equals pollution**. If a country wants to be rich (have a high GDP), it must build more factories and burn more oil. This project asks a very important question:
+> *"Is it possible for a country to get richer but also cleaner?"*
 
-### The Main Idea: Environmental Kuznets Curve (EKC)
-There is a theory called the Environmental Kuznets Curve (EKC). This theory says that when a country is poor and starts to grow, its pollution increases. But, after it reaches a certain level of wealth, the country starts to use cleaner technology and becomes more efficient. Then, its pollution starts to decrease, even if the economy continues to grow. This relationship looks like an inverted "U" shape [4, 5, 6].
+### The Main Theory: The Environmental Kuznets Curve (EKC)
+Scientists have a theory about this. It is like a story with three parts:
+1.  **The Beginning (Poor Phase):** A country is poor. It starts to build basics like roads and electricity. Pollution goes **UP** very fast.
+2.  **The Middle (Turning Point):** The country becomes rich. People start to care about clean air. They have money for better technology (like solar power).
+3.  **The End (Rich Phase):** The country gets even richer, but pollution starts to go **DOWN**.
 
-### Research Question
-This project tries to answer a simple question:
-*"Does the data from 1990 to 2022 show an inverted U-shaped relationship between a country's wealth (GDP per capita) and its pollution (CO₂ emissions per capita)?"*
-
----
-
-## 2. Data Sources (Where the data comes from)
-
-This project follows the course rules by using a public dataset and adding another dataset to it.
-
-### Main Dataset
-* **Dataset Name:** Our World in Data (OWID) - "CO₂ and Greenhouse Gas Emissions" [8, 2]
-* **What it is:** This is a large and trusted dataset with information about CO₂ emissions for many countries over many years [9, 10].
-* **Source:** OWID collects this data from top scientific sources like the Global Carbon Project [8, 11].
-
-### Enriching Dataset
-* **Dataset Name:** The World Bank - "World Development Indicators" [12, 13]
-* **What it is:** This dataset provides the economic information for each country. I used the "GDP per capita, PPP" indicator.
-* **Why this data:** This specific GDP measure is the best for comparing how rich countries are because it adjusts for differences in the cost of living [14]. This makes the comparison fair.
-
-### Dataset Details (Key Columns)
-The final combined dataset includes these important columns:
-* `country`: The name of the country/region.
-* `year`: The year of the observation (ranging from 1990 to 2022).
-* `iso_code`: The 3-letter code for the country (used to filter out continents).
-* `co2_per_capita`: Carbon dioxide emissions measured in tonnes per person.
-* `gdp`: Gross Domestic Product per capita, adjusted for inflation and purchasing power.
+This project tests if this "inverted U-shape" story is true using real world data.
 
 ---
 
-## 3. Data Collection Plan (How I got the data)
+## 2. The Data We Used
 
-Both datasets are free and easy to download. The process was:
+To answer this question, I needed two types of information for every country in the world. I combined two very trusted sources.
 
-1.  **Get the CO₂ Data:**
-    * I downloaded the "CO₂ and Greenhouse Gas Emissions" dataset as a CSV file from the Our World in Data GitHub page [8].
-    * **Download Link:** `https://nyc3.digitaloceanspaces.com/owid-public/data/co2/owid-co2-data.csv`
+### Source A: The Pollution Data
+*   **Where from?** "Our World in Data" (OWID).
+*   **What is it?** It measures $CO_2$ emissions.
+*   **Unit:** "Tonnes per person". This is important because big countries like China naturally have more pollution. Measuring "per person" makes it fair to compare China with a small country like Belgium.
 
-2.  **Get the Economic Data:**
-    * I downloaded the "GDP per capita, PPP" data as a CSV file from the World Bank's official data website [15, 16].
-    * **Download Link:** `https://data.worldbank.org/indicator/NY.GDP.PCAP.PP.KD`
+### Source B: The Money Data
+*   **Where from?** The World Bank.
+*   **What is it?** GDP (Gross Domestic Product) per capita.
+*   **Unit:** US Dollars (adjusted for inflation/PPP). This tells us the average income of a person in that country.
 
-3.  **Combine the Data:**
-    * I used Python (Pandas library) to merge these two files. I matched the data for each country and each year using the `iso_code` and `year`. This created one single, clean dataset ready for analysis.
-
----
-
-## 4. Methodology (How I analyzed the data)
-
-In this project, I used Python libraries like Pandas, Matplotlib, Seaborn, and Scipy. My analysis followed these steps:
-
-### A. Data Cleaning and Preparation
-Before analysis, I prepared the data:
-* I merged the CO₂ and GDP datasets based on country codes and years.
-* I filtered the data to include years from 1990 to 2022.
-* I removed rows with missing values (NaNs) or zero values to prevent errors during calculation.
-* I checked for outliers using box plots.
-
-### B. Exploratory Data Analysis (EDA)
-I explored the data to understand the distributions:
-* **Logarithmic Transformation:** Because most countries have low GDP and low emissions, the data was crowded in the charts. To see the relationship better, I used a **Log Scale** for both GDP and CO₂ charts.
-* **Visualizations:** I created histograms to see data distribution and scatter plots to analyze the relationship.
-
-### C. Hypothesis Testing
-I tested if there is a statistical relationship between economic growth and pollution.
-* **Null Hypothesis ($H_0$):** There is no significant correlation between GDP per capita and CO₂ emissions.
-* **Alternative Hypothesis ($H_A$):** There is a significant correlation between GDP per capita and CO₂ emissions.
-* **Method:** I used the **Pearson Correlation Coefficient** on the log-transformed data and calculated the **p-value**. I used a significance level (alpha) of 0.05.
+**The Final Table:**
+After joining these sources, I had a big table with columns like:
+*   `Country`: Name (e.g., Turkey, USA)
+*   `Year`: 1990 to 2020
+*   `GDP`: How rich they are.
+*   `CO2`: How much they pollute.
 
 ---
 
-## 5. Analysis and Findings
+## 3. Step-by-Step Methodology
 
-### Data Distributions
-First, I looked at how GDP and CO₂ emissions are distributed across the world.
+I used the Python programming language to do this work. Here is exactly what I did:
 
-**GDP Distribution and : CO₂ Distribution:**
+### Step 1: Cleaning the Data
+Real data is often messy.
+*   I removed lines where data was missing (for example, if we knew the GDP but not the CO2).
+*   I removed very small countries or islands that had errors in the data.
+*   I focused on the years **1990 to 2020** because this is the most important time for modern industry.
 
-*The histogram (left) shows the distribution of CO₂ emissions per capita using a log scale.*
-<img width="800" alt="logdistofgpd" src="https://github.com/user-attachments/assets/6a8ca48a-dcd5-4d6e-b0a4-164562d32dcb" />
+### Step 2: "Log Scale" Transformation
+**Problem:** The difference between poor countries and rich countries is huge. Some make \$1,000, some make \$60,000. If you put them on a normal chart, all the poor countries get squashed into the corner.
+**Solution:** I used a "Logarithmic Scale". This spreads out the data so we can see the differences between poor and developing nations much better.
 
-*The histogram (right) above shows the distribution of GDP per capita using a log scale.*
+### Step 3: Different Types of Analysis
+*   **Static Analysis:** Looking at just one year (2019) to see a snapshot.
+*   **Time Analysis:** Looking at how things change year by year (like a movie).
+*   **Math Test:** Using a formula called "Polynomial Regression" to scientifically test the curve.
 
+---
 
+## 4. Part 1: The Global Picture (Correlation)
 
-### Relationship Between GDP and CO₂
-This is the most important part of the analysis. I plotted GDP vs. CO₂ emissions for the year 2019 (pre-pandemic data) to see the trend clearly.
+First, I looked at the whole world at once for the year 2019.
 
+### The Findings
+I visualized the relationship between GDP and Carbon Emissions.
+
+*(Figure 1: Global Scatter Plot - 2019)*
 <img width="800" alt="gdpandco2mixed" src="https://github.com/user-attachments/assets/54d1e3a2-4334-4694-a0f9-56ba94f2d30f" />
 
-* **Observation:** The scatter plot shows a clear upward trend. The red line represents the regression line (trend line).
-* **Interpretation:** As countries get richer (move to the right), their CO₂ emissions tend to increase (move up).
-
-### Statistical Test Results
-I performed a Pearson Correlation test on the log-transformed data for the entire dataset (1990-2022).
-
-* **Pearson Correlation Coefficient:** `0.90`
-* **P-value:** < 0.001(`0.0` (virtually zero))
-
-**Result:** Since the p-value is less than 0.05, I **REJECT** the Null Hypothesis.
+*   **What we see:** The dots go up from left to right. This is a straight line, not a curve.
+*   **The Statistic:** The correlation score is **0.90**. (1.0 is a perfect match).
+*   **Interpretation:** This is bad news. In 2019, generally speaking, **more money still meant more pollution**. The global trend has not turned down yet.
 
 ---
 
-## 6. Conclusion
+## 5. Part 2: Adding Time (Temporality Analysis)
 
-My analysis shows a **very strong, positive relationship** (Correlation: 0.90) between a country's wealth (GDP) and its carbon footprint.
+The previous chart was just a photo. Now let's look at the "movie" from 1990 to 2020. This helps us see the direction countries are moving.
 
-1.  **Economic Growth increases Pollution:** Globally, as countries develop economically, they consume more energy and produce more CO₂.
-2.  **No Inverted "U" (Yet):** The global data does not clearly show the "inverted U" shape predicted by the Environmental Kuznets Curve. Instead, we see a linear increase. This might mean that most countries are still in the "scale effect" phase, where growth leads to more emissions.
-3.  **Statistical Significance:** The relationship is statistically significant, meaning it is not due to random chance.
+### A. Tracking Specific Countries
+I picked roughly 6 important countries to represent the world:
+*   **Developing:** China, India, Brazil, Turkey.
+*   **Developed:** USA, Germany.
+
+*(Figure 2: Time Series Analysis)*
+<img width="1189" height="590" alt="co2emissionpercapitaovertime" src="https://github.com/user-attachments/assets/e38f50c1-3a78-41e8-96ee-3e0b567db53d" />
+
+**Observation:**
+*   Look at **China (Orange)** and **India**: Their lines are shooting up! They are getting richer, but polluting much more.
+*   Look at the **USA (Blue)** and **Germany**: Their lines are slowly going **DOWN**. This is the key finding! They are rich, but they are reducing emissions.
+
+### B. The World Over Decades
+I also made "snapshots" for the years 1990, 2000, 2010, and 2020 to see if the global cloud of dots moved.
+
+*(Figure 3: Decadal Snapshots)*
+<img width="1389" height="985" alt="evoulution of gdp vs co2relationship" src="https://github.com/user-attachments/assets/9485278e-541b-4325-94ac-ea0a8f942ec1" />
+
+**Observation:** The pattern stays mostly the same (positive line), but the whole world is slowly moving to the top-right (richer and dirtier).
 
 ---
 
-## 7. Limitations and Future Work
+## 6. Part 3: Testing the Theory (EKC Hypothesis)
 
-### Limitations
-This study has a few limitations:
-* **Data Quality:** The data relies on reports from individual countries. Some countries might have missing data or errors, especially in older years.
-* **Correlation vs. Causation:** We found a strong correlation, but this does not prove that high GDP *causes* high CO₂ emissions directly. Other factors like population size or energy policies might be involved.
-* **Global View:** This analysis looks at the whole world together. It might hide different trends in specific individual countries.
+Finally, I used mathematics to test the "Environmental Kuznets Curve" theory specifically for a rich country: the **USA**.
 
-### Future Work
-In the next steps, I plan to look at individual developed countries separately. It is possible that the "inverted U" shape (emissions going down) only happens in very rich countries, and looking at the global average hides this specific trend. I could also group countries by continent to see regional differences.
+**The Logic:**
+I fitted a curve formula ($y = ax^2 + bx + c$) to the USA data.
+*   If the curve bends **UP**, pollution is out of control.
+*   If the curve bends **DOWN** (Inverted U), the theory is correct.
+
+*(Figure 4: EKC Test for USA)*
+
+<img width="848" height="548" alt="ekc hypothesis testing usa" src="https://github.com/user-attachments/assets/ae0ea49f-13da-4c42-9898-d23eaa94a466" />
+
+**Statistical Result:**
+*   The math shows a **negative curve** (Coefficient is -1.35e-09).
+*   The "P-value" is 0.000 (which means the result is definitely real, not luck).
+
+**Verdict:** The theory is **TRUE** for the USA. They have passed the peak and are now in the "cleaner" phase.
+
+---
+
+## 7. Final Conclusion
+
+This project reveals a complex story about our world:
+
+1.  **The Bad News:** For most of the world (especially developing nations), economic growth still causes massive pollution. The global link is very strong ($0.90$ correlation).
+2.  **The Good News:** It is possible to change! My analysis of the USA and Germany proves that **you can be rich and green**. Once a country reaches a high level of development, it can decouple money from carbon.
+3.  **The Hope:** Developing countries (like Turkey, China, India) are currently in the rising phase. We hope they can reach the "turning point" faster than Europe and the USA did, by using new technologies.
+
+---
+
+## 8. Limitations and What's Next
+
+*   **Missing Pieces:** I only looked at $CO_2$. I did not look at plastic waste, deforestation, or water pollution.
+*   **It's Not Just Money:** I focused on GDP. But laws, government policies, and population size also affect pollution.
+*   **Future Ideas:** Next time, I would like to group countries by continent. For example, does Europe follow a different path than Asia?
 
 ---
 
 ### References
-[1] IPCC, 2021: Climate Change 2021.
-[2] Ritchie, H., Roser, M. (2020) - "CO₂ and Greenhouse Gas Emissions". OurWorldInData.org.
-[3] Stern, D. I. (2004). The Rise and Fall of the Environmental Kuznets Curve.
-[4] Grossman, G. M., & Krueger, A. B. (1991). Environmental Impacts of a North American Free Trade Agreement.
-[5] Kuznets, S. (1955). Economic Growth and Income Inequality.
-[6] Panayotou, T. (1993). Empirical Tests and Policy Analysis of Environmental Degradation.
-[7] Dasgupta, S., et al. (2002). Confronting the Environmental Kuznets Curve.
-[8] OWID CO2 Data GitHub Repository. https://github.com/owid/co2-data
-[9] Global Carbon Project. (2022).
-[10] Jones, M. W., et al. (2023). Scientific Data.
-[11] Friedlingstein, P., et al. (2022). Earth System Science Data.
-[12] The World Bank. (2023). World Development Indicators.
-[13] The World Bank Group. GDP per capita, PPP.
-[14] Callen, T. (2020). PPP Versus the Market. IMF.
-[15] World Bank Open Data. https://data.worldbank.org/
-[16] World Bank Data Catalog.
+*   It is based on data from **Our World in Data** (2022) and **The World Bank** (2023).
+*   Concepts are based on the **Environmental Kuznets Curve (EKC)** theory from economics literature (Grossman & Krueger, 1991).
 
-### AI Disclosure
-I used AI tools (ChatGPT/Gemini) to help with writing the Python code for cleaning data and creating visualizations. I also used them to check the grammar of this report. All analysis decisions and interpretations are my own.
+### Tools Used
+*   **Python:** For all calculations.
+*   **Libraries:** Pandas (for data), Matplotlib & Seaborn (for charts), Statsmodels (for the math test).
+*   **AI Assistance:** ChatGPT was used to help debug Python code and correct English grammar. The analysis design is original.
