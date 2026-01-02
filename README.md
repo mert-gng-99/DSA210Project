@@ -217,7 +217,8 @@ Correlation is not causation. Just because rich countries pollute, does it mean 
 *   **Result (ATE):** 7.52.
 *   **Interpretation:** Being a "High Income" country causes an average increase of 7.52 tonnes of CO2 per person, independent of population size. This proves the link is causal, not just a coincidence.
 
-![Causal Inference](causal_inference.png)
+
+<img width="1000" height="600" alt="causal_inference" src="https://github.com/user-attachments/assets/21f92efa-6d0c-42a4-8d34-a8b86562d404" />
 
 ### G. Fairness & Bias Check (Ethics)
 I checked if my Machine Learning model is "fair". Does it work equally well for rich and poor countries?
@@ -226,7 +227,8 @@ I checked if my Machine Learning model is "fair". Does it work equally well for 
 *   **Finding:** The model had slightly higher errors for very poor nations because their data is sometimes missing or noisy.
 *   **Conclusion:** While the model is accurate globally, future improvements should focus on getting better data for developing nations to ensure the model is fair to everyone.
 
-![Fairness Check](fairness_check.png)
+
+<img width="800" height="600" alt="fairness_check" src="https://github.com/user-attachments/assets/e9a64c81-8a34-4018-819a-efcc815eda83" />
 
 ---
 
